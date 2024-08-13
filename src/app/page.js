@@ -43,7 +43,12 @@ function Page() {
   const [isTxnModal2Open, setIsTxnModal2Open] = useState(false);
   const [result, setResult] = useState(null);
  
-
+  useEffect(() => {
+    if (account.status === "connected" && !address) {
+      disconnect();
+      console.warn("Connection rejected or invalid address received");
+    }
+  }, [account.status, address, disconnect]);
 
   const openTxnModal = () => {
     setIsTxnModalOpen(true);
